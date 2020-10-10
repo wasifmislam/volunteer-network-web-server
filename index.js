@@ -45,6 +45,14 @@ client.connect(err => {
     })
     console.log(newRegistration)
   })
+
+  app.get('/enrolledEvents', (req, res)=> {
+    volunteerCollection.find({})
+    .toArray( (err, documents) => {
+      res.send(documents)
+    }) 
+  })
+  
  
 });
 
