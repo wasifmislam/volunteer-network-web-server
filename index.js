@@ -47,12 +47,13 @@ client.connect(err => {
   })
 
   app.get('/enrolledEvents', (req, res)=> {
-    volunteerCollection.find({})
+    console.log(req.query.email);
+    volunteerCollection.find({email: req.query.email})
     .toArray( (err, documents) => {
       res.send(documents)
     }) 
   })
-  
+
  
 });
 
