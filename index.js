@@ -18,6 +18,7 @@ const port = 5000
 const client = new MongoClient(uri, { useNewUrlParser: true , useUnifiedTopology: true  });
 client.connect(err => {
   const worksCollection = client.db("volunteerNetworkWeb").collection("works");
+  
 
   app.post('/addWork', (req, res) =>{
       const works = req.body;
@@ -34,6 +35,15 @@ client.connect(err => {
       .toArray( (err, documents) => {
           res.send(documents);
       })
+  })
+  const volunteerCollection = client.db("volunteerNetworkWeb").collection("enrolled");
+  app.post('/addRegistration', (req, res) => {
+    const newRegistration = req.body;
+    volunteerCollection.insertOne(newRegistration)
+    .then(result => {
+      console.log(result)
+    })
+    console.log(newRegistration)
   })
  
 });
